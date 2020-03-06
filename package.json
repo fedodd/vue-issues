@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server --progress",
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
-    "build-prod": "webpack -p --mode production"
+    "build-prod": "webpack -p --mode production",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.19.2",

@@ -40,8 +40,6 @@
     max-width: 100%;
   }
 
-
-
   .th, .td {
     padding: 5px 15px 5px 5px;
   }
@@ -76,7 +74,6 @@
       word-break: break-all;
       vertical-align: baseline;
     }
-
   }
 
 </style>
