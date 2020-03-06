@@ -5,17 +5,19 @@
       {{name}}
     </h1>
     <button v-on:click="getData">Загрузить</button>
-    <ol>
+    <!-- <ol>
       <li v-for="issue in issues" v-bind:key="issue.id">
         {{ issue.title }}
       </li>
-    </ol>
+    </ol> -->
+    <Issues v-bind:issues-data="issues"></Issues>
   </div>
 </template>
 
 <script lang="ts">
   import axios from 'axios';
   import Vue from "vue";
+  import Issues from './components/issues/Issues';
 
   export default Vue.extend({
     data: function() {
@@ -43,6 +45,9 @@
 
         getIssue((data) => this.issues = data);
       }
+    },
+    components: {
+      Issues
     }
   });
 </script>
