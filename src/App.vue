@@ -4,10 +4,7 @@
     <h1>
       {{name}}
     </h1>
-    <button
-      class="button"
-      v-on:click="getData(link)">Загрузить
-    </button>
+
 
     <Issues
       v-if="issues.length"
@@ -38,6 +35,7 @@
         link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
       }
     },
+
     methods: {
       getData: function (link) {
         async function getIssues(callback) {
@@ -63,7 +61,10 @@
         function updateQuery(response) {
 
         }
-      },
+      }
+    },
+    created() {
+      this.getData(this.link);
     },
     components: {
       Issues,
@@ -140,6 +141,7 @@
     h1 {
       font-size: 1.2em;
       width: 100%;
+      padding: 5px;
     }
     .holder {
       margin: 5px;
