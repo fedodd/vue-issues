@@ -1,8 +1,9 @@
 <template>
   <tr>
-    <td>{{issue.title}}</td>
-    <td>{{issue.comments}}</td>
-    <td>{{issue.state}}</td>
+    <td class="issue-name">{{issue.title}}</td>
+    <td class="issue-comments">{{issue.comments}}</td>
+    <td class="issue-status">{{issue.state}}</td>
+    <td class="">{{issue.created_at}}</td>
   </tr>
 </template>
 

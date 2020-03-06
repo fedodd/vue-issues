@@ -21,6 +21,21 @@
 
 
 <style>
+  button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-right: 20px;
+  }
 
+  button:last-child {
+    margin-right: 0;
+  }
+
+  button:disabled {
+    background-color: grey;
+    color: lightgrey;
+  }
 
 </style>
