@@ -13,7 +13,11 @@ const config = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          postcss: [require('postcss-nested')()
+          ]
+        }
       },
       {
         test: /\.js$/,
@@ -21,7 +25,7 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
+        test: /\.(pcss|css)$/,
         use: [
           'vue-style-loader',
           {
@@ -58,6 +62,10 @@ const config = {
         template: require('html-webpack-template'),
         inject: false,
         appMountId: 'app',
+        meta: [{
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+        }]
       })
   ],
   optimization: {

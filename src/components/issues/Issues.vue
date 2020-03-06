@@ -1,15 +1,17 @@
 <template>
-  <table>
-    <thead>
-      <th class="issue-name">Задача</th>
-      <th class="issue-comments">Комментарии
-        <button @click="filterData(link + '&sort=comments')" >↓</button>
+  <table class="table">
+    <thead class="thead">
+      <th class="th issue-name">Задача</th>
+      <th class="th issue-status">Статус</th>
+      <th class="th issue-comments">Комментарии
+        <button
+          class="button is__filter"
+          @click="filterData(link + '&sort=comments')" ></button>
       </th>
-      <th class="issue-status">Статус</th>
-      <th class="">Создана
-        <button>
-          <button @click="filterData(link + '&sort=created_at')" >↓</button>
-        </button>
+      <th class="th issue-created">Создана
+        <button
+          class="button is__filter"
+          @click="filterData(link + '&sort=created_at')" ></button>
       </th>
     </thead>
     <Issue v-for="issue in issuesData" v-bind:key="issue.id" v-bind:issue="issue"/>
@@ -32,15 +34,19 @@
 
 
 <style>
-  table {
+  .table {
+    margin: 5px;
     border-collapse: collapse;
+    max-width: 100%;
   }
 
-  th, td {
+
+
+  .th, .td {
     padding: 5px 15px 5px 5px;
   }
 
-  tr:nth-child(2n) {
+  .tr:nth-child(2n+1) {
     background-color: #efefef;
   }
 
@@ -54,6 +60,23 @@
 
   .issue-status {
     text-align: center;
+  }
+
+  .issue-created {
+    text-align: right;
+  }
+
+  @media (max-width: 400px) {
+    .th, .td {
+      font-size: 0.8em;
+      padding: 2px 5px 2px 2px;
+    }
+
+    .th {
+      word-break: break-all;
+      vertical-align: baseline;
+    }
+
   }
 
 </style>

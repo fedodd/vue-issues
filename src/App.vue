@@ -4,13 +4,13 @@
     <h1>
       {{name}}
     </h1>
-    <button v-on:click="getData(link)">Загрузить</button>
-    <!-- <ol>
-      <li v-for="issue in issues" v-bind:key="issue.id">
-        {{ issue.title }}
-      </li>
-    </ol> -->
+    <button
+      class="button"
+      v-on:click="getData(link)">Загрузить
+    </button>
+
     <Issues
+      v-if="issues.length"
       v-bind:issues-data="issues"
       v-bind:filterData="getData"
       v-bind:link="link"
@@ -36,17 +36,11 @@
         issues: [],
         pageLinks: {},
         link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
-        // linkParams: {
-        //   state: "open",
-        //   sort: "comments",
-        //   page: 1,
-        //   per_page: 20
-        // }
       }
     },
     methods: {
       getData: function (link) {
-        async function getIssue(callback) {
+        async function getIssues(callback) {
 
           try {
             const response = await axios.get(link);
@@ -56,7 +50,9 @@
             console.error(error);
           }
         }
-        getIssue((response) => {
+
+        //update data after request
+        getIssues((response) => {
           const {first, prev, next, last} = parse(response.headers.link);
           this.pageLinks = {first, prev, next, last};
           console.log('callback', response.config);
@@ -78,16 +74,77 @@
 
 
 <style>
-h1 {
-  color: white;
-  background-color: black;
-  width: max-content;
-  max-width: 80wv;
-}
 
-.holder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  h1 {
+    width: max-content;
+    max-width: 80vw;
+  }
+
+
+  .holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button {
+    background-color: darkmagenta;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 5px;
+    margin-right: 20px;
+    transition: .3s;
+    outline: none;
+  }
+
+  .button:hover {
+    cursor: pointer;
+    box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.75);
+  }
+
+  .button:hover:disabled {
+    cursor:not-allowed;
+    box-shadow: none;
+  }
+
+  .button:last-child {
+    margin-right: 0;
+  }
+
+  .button:disabled {
+    background-color: grey;
+    color: lightgrey;
+  }
+
+  .button.is__filter {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 10px solid transparent;
+    border-top-color: darkmagenta;
+    background-color: transparent;
+    padding: 0
+  }
+
+  .button.button.is__filter:hover {
+    box-shadow: none;
+  }
+
+    @media (max-width: 400px) {
+    h1 {
+      font-size: 1.2em;
+      width: 100%;
+    }
+    .holder {
+      margin: 5px;
+    }
+  }
+
+
 </style>

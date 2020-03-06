@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="pagination">
     <button
+      class="button"
       v-for="(link, buttonType) in pageLinks"
       v-bind:key="buttonType"
       v-bind:disabled="link===undefined"
@@ -21,21 +22,10 @@
 
 
 <style>
-  button {
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 5px;
-    margin-right: 20px;
+
+  .pagination {
+    padding:20px;
   }
 
-  button:last-child {
-    margin-right: 0;
-  }
-
-  button:disabled {
-    background-color: grey;
-    color: lightgrey;
-  }
 
 </style>
