@@ -10,10 +10,18 @@
     "dev": "webpack-dev-server --progress",
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
-    "build-prod": "webpack -p --mode production"
+    "build-prod": "webpack -p --mode production",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "gh-pages": "^2.2.0",
+    "github-parse-link": "^1.1.1",
+    "lodash": "^4.17.15",
+    "postcss-conditionals": "^2.1.0",
+    "postcss-mixins": "^6.2.3",
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
     "vue": "^2.6.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-hot-middleware": "^2.25.0"

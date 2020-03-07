@@ -1,56 +1,152 @@
 
 <template>
-  <div>
+  <div class="holder">
     <h1>
       {{name}}
     </h1>
-    <button v-on:click="getData">Загрузить</button>
-    <ol>
-      <li v-for="issue in issues" v-bind:key="issue.id">
-        {{ issue.title }}
-      </li>
-    </ol>
+
+
+    <Issues
+      v-if="issues.length"
+      v-bind:issues-data="issues"
+      v-bind:filterData="getData"
+      v-bind:link="link"
+      ></Issues>
+    <Pagination
+      v-bind:pageLinks="pageLinks"
+      v-bind:getData="getData"/>
   </div>
 </template>
 
 <script lang="ts">
   import axios from 'axios';
   import Vue from "vue";
+  import parse from 'github-parse-link';
+  import Issues from './components/issues/Issues';
+  import Pagination from "./components/Pagination";
+
 
   export default Vue.extend({
     data: function() {
       return {
         name: 'Список открытых задач по репозеторию vue:',
-        issues: []
+        issues: [],
+        pageLinks: {},
+        link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
       }
     },
+
     methods: {
-      getData: function (e) {
-        async function getIssue(callback) {
+      getData: function (link) {
+        async function getIssues(callback) {
+
           try {
-            const response = await axios.get('https://api.github.com/repos/vuejs/vue/issues', {
-              params: {
-                state: "open",
-                sort: "comments"
-              }
-            });
-            callback(response.data);
+            const response = await axios.get(link);
+            callback(response);
 
           } catch (error) {
             console.error(error);
           }
         }
 
-        getIssue((data) => this.issues = data);
+        //update data after request
+        getIssues((response) => {
+          const {first, prev, next, last} = parse(response.headers.link);
+          this.pageLinks = {first, prev, next, last};
+          console.log('callback', response.config);
+          this.link = response.config.url
+          this.issues = response.data
+        });
+
+        function updateQuery(response) {
+
+        }
       }
+    },
+    created() {
+      this.getData(this.link);
+    },
+    components: {
+      Issues,
+      Pagination
     }
   });
 </script>
 
 
 <style>
-h1 {
-  color: white;
-  background-color: black;
-}
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  h1 {
+    width: max-content;
+    max-width: 80vw;
+  }
+
+
+  .holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button {
+    background-color: darkmagenta;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 5px;
+    margin-right: 20px;
+    transition: .3s;
+    outline: none;
+  }
+
+  .button:hover {
+    cursor: pointer;
+    box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.75);
+  }
+
+  .button:hover:disabled {
+    cursor:not-allowed;
+    box-shadow: none;
+  }
+
+  .button:last-child {
+    margin-right: 0;
+  }
+
+  .button:disabled {
+    background-color: grey;
+    color: lightgrey;
+  }
+
+  .button.is__filter {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 10px solid transparent;
+    border-top-color: darkmagenta;
+    background-color: transparent;
+    padding: 0
+  }
+
+  .button.button.is__filter:hover {
+    box-shadow: none;
+  }
+
+    @media (max-width: 400px) {
+    h1 {
+      font-size: 1.2em;
+      width: 100%;
+      padding: 5px;
+    }
+    .holder {
+      margin: 5px;
+    }
+  }
+
+
 </style>
