@@ -13,7 +13,7 @@
       v-bind:link="link"
       ></Issues>
     <Pagination
-      v-bind:pageLinks="pageLinks"
+      v-bind:pageButtons="pageButtons"
       v-bind:getData="getData"/>
   </div>
 </template>
@@ -31,7 +31,7 @@
       return {
         name: 'Список открытых задач по репозеторию vue:',
         issues: [],
-        pageLinks: {},
+        pageButtons: {},
         link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
       }
     },
@@ -52,8 +52,12 @@
         //update data after request
         getIssues((response) => {
           const {first, prev, next, last} = parse(response.headers.link);
-          this.pageLinks = {first, prev, next, last};
-          console.log('callback', response.config);
+
+          this.pageButtons = {
+            'Перв.': first,
+            'Пред.': prev,
+            'След.': next,
+            'Последн.': last};
           this.link = response.config.url
           this.issues = response.data
         });
