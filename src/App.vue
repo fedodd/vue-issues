@@ -6,14 +6,14 @@
     </h1>
 
 
-    <IssueTable
+    <Issues
       v-if="issues.length"
       v-bind:issues-data="issues"
       v-bind:filterData="getData"
       v-bind:link="link"
-      ></IssueTable>
+      ></Issues>
     <Pagination
-      v-bind:pageButtons="pageButtons"
+      v-bind:pageLinks="pageLinks"
       v-bind:getData="getData"/>
   </div>
 </template>
@@ -22,7 +22,7 @@
   import axios from 'axios';
   import Vue from "vue";
   import parse from 'github-parse-link';
-  import IssueTable from './components/issueTable/IssueTable';
+  import Issues from './components/issues/Issues';
   import Pagination from "./components/Pagination";
 
 
@@ -31,7 +31,7 @@
       return {
         name: 'Список открытых задач по репозеторию vue:',
         issues: [],
-        pageButtons: {},
+        pageLinks: {},
         link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
       }
     },
@@ -52,13 +52,8 @@
         //update data after request
         getIssues((response) => {
           const {first, prev, next, last} = parse(response.headers.link);
-          this.pageButtons = {
-            'Первая': first,
-            'Пред.': prev,
-            'След.': next,
-            'Послед.': last
-          };
-
+          this.pageLinks = {first, prev, next, last};
+          console.log('callback', response.config);
           this.link = response.config.url
           this.issues = response.data
         });
@@ -72,7 +67,7 @@
       this.getData(this.link);
     },
     components: {
-      IssueTable,
+      Issues,
       Pagination
     }
   });
