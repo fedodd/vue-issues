@@ -2,8 +2,9 @@
   <tr class="tr">
     <td class="td issue-name">
       <router-link
-        v-bind:to="'/issue/' + issue.id"
-        v-bind:issue="issue">{{issue.title}}</router-link>
+        v-bind:to="'/issues/' + issue.id">
+        {{issue.title}}
+      </router-link>
     </td>
     <td class="td issue-status">{{issue.state}}</td>
     <td class="td issue-comments">{{issue.comments}}</td>

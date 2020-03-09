@@ -6,17 +6,16 @@ import IssuePage from "./views/IssuePage";
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   routes: [
     {
-      path: '/',
-      component: () => import('./views/IssueList'),
+      path: "/",
+      component: () => import("./views/IssueList")
     },
     {
-      name:'issue',
-      path: '/issues/:id',
-      component: () => import('./views/IssuePage'),
+      path: "/issues/:id",
+      component: IssuePage,
       props: true
-    },
+    }
   ]
-})
+});

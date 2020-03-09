@@ -1,6 +1,6 @@
 <template>
     <div>
-      <button @click="getData(link)">Загрузить</button>
+      <h2>Список открытых задач по репозеторию vue:</h2>
       <section v-if="errored">
         <p>Что-то пошло нет так, попробуйте перезагрузить страницу.</p>
       </section>
@@ -20,12 +20,16 @@
 <script lang="ts">
   import axios from 'axios';
   import Vue from "vue";
+  import { mapGetters, mapActions } from "vuex";
   import parse from 'github-parse-link';
   import Issues from '../components/issues/Issues';
   import Pagination from "../components/Pagination";
 
 
   export default Vue.extend({
+    name: "issueList",
+    computed: mapGetters(['allIssues']),
+
     data: function() {
       return {
         name: 'Список открытых задач по репозеторию vue:',
@@ -39,6 +43,7 @@
     },
 
     methods: {
+      //mapActions('pseudoFetchIssues'),
       getData: function (link, params) {
         this.linkParams = {...params};
         //make request function
@@ -56,22 +61,22 @@
               'След.': next,
               'Последн.': last};
             this.link = response.config.url
-            this.issues = response.data
+            this.issues = response.data;
+
+            // just for train and for push data to issuePage
+            this.$store.dispatch('pseudoFetchIssues', response.data)
+
           })
           .catch(error => {
             console.log(error);
             this.errored = true;
           })
           .finally(() => (this.loading = false));
-      },
-      getIssue: function(targetId) {
-        const targetIssue = this.issues.find(elem => elem.id === targetId)
-        return targetIssue;
       }
     },
-    // mounted() {
-    //   this.getData(this.link);
-    // },
+    mounted() {
+      this.getData(this.link);
+    },
     components: {
       Issues,
       Pagination

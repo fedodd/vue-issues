@@ -1,29 +1,14 @@
 
 <template>
   <div class="holder">
-    <h1>
-    <!-- <h1 v-on:click="getData(link)"> -->
-      {{name}}
-    </h1>
     <router-view/>
-
   </div>
 </template>
 
 <script lang="ts">
-  // import axios from 'axios';
   import Vue from "vue";
-  // import parse from 'github-parse-link';
-  // import Issues from '../components/issues/Issues';
-  // import Pagination from "../components/Pagination";
-
 
   export default Vue.extend({
-    data: function() {
-      return {
-        name: 'Список открытых задач по репозеторию vue:',
-      }
-    }
   });
 </script>
 
