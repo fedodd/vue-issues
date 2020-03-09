@@ -5,9 +5,7 @@
     <!-- <h1 v-on:click="getData(link)"> -->
       {{name}}
     </h1>
-
-    <router-view />
-
+    <router-view/>
 
   </div>
 </template>

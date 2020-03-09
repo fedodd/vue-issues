@@ -10,11 +10,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: IssueList
+      component: () => import('./views/IssueList'),
     },
     {
-      path: '/issue',
-      component: () => import('./views/IssuePage')
+      name:'issue',
+      path: '/issues/:id',
+      component: () => import('./views/IssuePage'),
+      props: true
     },
   ]
 })

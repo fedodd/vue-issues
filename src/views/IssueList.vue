@@ -1,8 +1,8 @@
 <template>
     <div>
-      <button @click="getData(link)">загрузить</button>
+      <button @click="getData(link)">Загрузить</button>
       <section v-if="errored">
-        <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+        <p>Что-то пошло нет так, попробуйте перезагрузить страницу.</p>
       </section>
       <section v-else>
         <div v-if="loading">Loading...</div>
@@ -41,8 +41,6 @@
     methods: {
       getData: function (link, params) {
         this.linkParams = {...params};
-        console.log(' i am in!', link, this.linkParams );
-
         //make request function
         axios
           .get(link, {params: {
@@ -65,34 +63,10 @@
             this.errored = true;
           })
           .finally(() => (this.loading = false));
-
-        // async function getIssues(callback) {
-        //   try {
-        //     const response = await axios.get(link);
-        //     callback(response);
-
-        //   } catch (error) {
-        //     console.error(error);
-        //     this.errored = true;
-        //   } finally {
-        //     console.log(this);
-
-        //     this.loading = false;
-        //   };
-        // }
-
-        //update data after request
-        // getIssues((response) => {
-        //   const {first, prev, next, last} = parse(response.headers.link);
-
-        //   this.pageButtons = {
-        //     'Перв.': first,
-        //     'Пред.': prev,
-        //     'След.': next,
-        //     'Последн.': last};
-        //   this.link = response.config.url
-        //   this.issues = response.data
-        // });
+      },
+      getIssue: function(targetId) {
+        const targetIssue = this.issues.find(elem => elem.id === targetId)
+        return targetIssue;
       }
     },
     // mounted() {
