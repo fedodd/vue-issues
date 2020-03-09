@@ -6,12 +6,12 @@
       <th class="th issue-comments">Комментарии
         <button
           class="button is__filter"
-          v-on:click="sortData('comments')" ></button>
+          @click="getData(link, {sort: 'comments'})" ></button>
       </th>
       <th class="th issue-created">Создана
         <button
           class="button is__filter"
-          v-on:click="sortData('created_at')" ></button>
+          @click="getData(link, {sort:'created_at'})" ></button>
       </th>
     </thead>
     <Issue v-for="issue in issuesData" v-bind:key="issue.id" v-bind:issue="issue"/>
@@ -29,13 +29,7 @@
       'issuesData': Array,
       'getData': Function,
       'link': String
-    },
-    methods: {
-      sortData: function (sortType) {
-        console.log(this.link, sortType);
 
-        this.getData(this.link, {sort: sortType});
-      }
     },
     components: {
       Issue

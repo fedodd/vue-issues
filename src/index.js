@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App';
+import router from "./router";
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 //import Issues from "./components/issues/Issues.vue";
@@ -40,5 +41,6 @@ requireComponent.keys().forEach(fileName => {
 
 new Vue({
   el: '#app',
+  router,
   render: h => h(App),
 });
