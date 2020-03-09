@@ -24,7 +24,7 @@
 
 
   export default Vue.extend({
-    name: 'Issues',
+    name: 'IssueTable',
     props: {
       'issuesData': Array,
       'getData': Function,

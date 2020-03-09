@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Задача: {{issue.title}}</h2>
+    <h2>Задача: <span class="is__accent">{{issue.title}}</span></h2>
     <ul>
       <li>Создана: {{issue.created_at}}</li>
       <li>Комментариев:
@@ -36,3 +36,9 @@
   })
 
 </script>
+
+<style scoped>
+  .is__accent {
+    color: darkblue;
+  }
+</style>

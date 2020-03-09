@@ -6,7 +6,7 @@
       </section>
       <section v-else>
         <div v-if="loading">Loading...</div>
-        <Issues v-else
+        <IssueTable v-else
           v-bind:issues-data="issues"
           v-bind:getData="getData"
           v-bind:link="link" />
@@ -22,7 +22,7 @@
   import Vue from "vue";
   import { mapGetters, mapActions } from "vuex";
   import parse from 'github-parse-link';
-  import Issues from '../components/issues/Issues';
+  import IssueTable from '../components/issueTable/IssueTable';
   import Pagination from "../components/Pagination";
 
 
@@ -78,7 +78,7 @@
       this.getData(this.link);
     },
     components: {
-      Issues,
+      IssueTable,
       Pagination
     }
   });
