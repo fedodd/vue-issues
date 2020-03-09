@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "webpack-dev-server --progress",
+    "start": "webpack-dev-server --progress",
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
@@ -23,6 +23,8 @@
     "postcss-nested": "^4.2.1",
     "postcss-preset-env": "^6.7.0",
     "vue": "^2.6.11",
+    "vue-router": "^3.1.6",
+    "vuex": "^3.1.2",
     "webpack-dev-server": "^3.10.3",
     "webpack-hot-middleware": "^2.25.0"
   },

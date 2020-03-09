@@ -1,9 +1,13 @@
 <template>
   <tr class="tr">
-    <td class="td issue-name">{{issue.title}}</td>
+    <td class="td issue-name">
+      <router-link
+        v-bind:to="'/issues/' + issue.id">
+        {{issue.title}}
+      </router-link>
+    </td>
     <td class="td issue-status">{{issue.state}}</td>
     <td class="td issue-comments">{{issue.comments}}</td>
-
     <td class="td">{{issue.created_at}}</td>
   </tr>
 </template>

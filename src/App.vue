@@ -1,77 +1,17 @@
 
 <template>
   <div class="holder">
-    <h1>
-      {{name}}
-    </h1>
-
-
-    <Issues
-      v-if="issues.length"
-      v-bind:issues-data="issues"
-      v-bind:filterData="getData"
-      v-bind:link="link"
-      ></Issues>
-    <Pagination
-      v-bind:pageLinks="pageLinks"
-      v-bind:getData="getData"/>
+    <router-view/>
   </div>
 </template>
 
 <script lang="ts">
-  import axios from 'axios';
   import Vue from "vue";
-  import parse from 'github-parse-link';
-  import Issues from './components/issues/Issues';
-  import Pagination from "./components/Pagination";
-
 
   export default Vue.extend({
-    data: function() {
-      return {
-        name: 'Список открытых задач по репозеторию vue:',
-        issues: [],
-        pageLinks: {},
-        link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
-      }
-    },
-
-    methods: {
-      getData: function (link) {
-        async function getIssues(callback) {
-
-          try {
-            const response = await axios.get(link);
-            callback(response);
-
-          } catch (error) {
-            console.error(error);
-          }
-        }
-
-        //update data after request
-        getIssues((response) => {
-          const {first, prev, next, last} = parse(response.headers.link);
-          this.pageLinks = {first, prev, next, last};
-          console.log('callback', response.config);
-          this.link = response.config.url
-          this.issues = response.data
-        });
-
-        function updateQuery(response) {
-
-        }
-      }
-    },
-    created() {
-      this.getData(this.link);
-    },
-    components: {
-      Issues,
-      Pagination
-    }
   });
 </script>
+
 
 
 <style>
@@ -84,7 +24,6 @@
     width: max-content;
     max-width: 80vw;
   }
-
 
   .holder {
     display: flex;

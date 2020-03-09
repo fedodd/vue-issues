@@ -61,6 +61,7 @@ const config = {
     new HtmlWebpackPlugin({
         template: require('html-webpack-template'),
         inject: false,
+        title: 'Opened Vue issues',
         appMountId: 'app',
         meta: [{
           name: 'viewport',

@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import App from './App';
+import router from "./router";
+import store from "./store/index";
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
-//import Issues from "./components/issues/Issues.vue";
 
 const requireComponent = require.context(
   // Относительный путь до каталога компонентов
@@ -40,5 +41,7 @@ requireComponent.keys().forEach(fileName => {
 
 new Vue({
   el: '#app',
+  router,
+  store,
   render: h => h(App),
 });
