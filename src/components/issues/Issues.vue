@@ -6,12 +6,12 @@
       <th class="th issue-comments">Комментарии
         <button
           class="button is__filter"
-          @click="filterData(link + '&sort=comments')" ></button>
+          v-on:click="sortData('comments')" ></button>
       </th>
       <th class="th issue-created">Создана
         <button
           class="button is__filter"
-          @click="filterData(link + '&sort=created_at')" ></button>
+          v-on:click="sortData('created_at')" ></button>
       </th>
     </thead>
     <Issue v-for="issue in issuesData" v-bind:key="issue.id" v-bind:issue="issue"/>
@@ -25,8 +25,19 @@
 
   export default Vue.extend({
     name: 'Issues',
-     props: {'issuesData': Array, 'filterData': Function, 'link': String},
-     components: {
+    props: {
+      'issuesData': Array,
+      'getData': Function,
+      'link': String
+    },
+    methods: {
+      sortData: function (sortType) {
+        console.log(this.link, sortType);
+
+        this.getData(this.link, {sort: sortType});
+      }
+    },
+    components: {
       Issue
     }
   })

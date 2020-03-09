@@ -5,7 +5,7 @@
       v-for="(link, buttonType) in pageButtons"
       v-bind:key="buttonType"
       v-bind:disabled="link===undefined"
-      @click="getData(link)" >{{buttonType}}</button>
+      v-on:click="getData(link)" >{{buttonType}}</button>
   </div>
 </template>
 
