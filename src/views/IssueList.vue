@@ -6,8 +6,9 @@
       </section>
       <section v-else>
         <div v-if="loading">Loading...</div>
+
         <IssueTable v-else
-          v-bind:issues-data="issues"
+          v-bind:issues-data="this.$store.getters.allIssues"
           v-bind:getData="getData"
           v-bind:link="link" />
         <Pagination

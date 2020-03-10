@@ -7,10 +7,11 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
+  base: '/',
   routes: [
     {
       path: "/",
-      component: () => import("./views/IssueList")
+      component: IssueList
     },
     {
       path: "/issues/:id",
