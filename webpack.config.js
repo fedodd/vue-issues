@@ -4,6 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
+
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -66,7 +67,10 @@ const config = {
         meta: [{
           name: 'viewport',
           content: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-        }]
+        }],
+        // publicPath: process.env.NODE_ENV === 'production' ?
+        //   'https://fedodd.github.io/vue-issues/':
+        //   '/'
       })
   ],
   optimization: {

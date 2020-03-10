@@ -22,8 +22,8 @@
   import Vue from "vue";
   import { mapGetters, mapActions } from "vuex";
   import parse from 'github-parse-link';
-  import IssueTable from '../components/issueTable/IssueTable';
-  import Pagination from "../components/Pagination";
+  import IssueTable from '../components/issueTable/IssueTable.vue';
+  import Pagination from "../components/Pagination.vue";
 
 
   export default Vue.extend({

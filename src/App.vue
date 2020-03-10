@@ -1,14 +1,24 @@
 
 <template>
   <div class="holder">
+    <!-- <IssueList /> -->
     <router-view/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from "vue";
+  import IssueList from "./views/IssueList.vue";
 
   export default Vue.extend({
+    data: function() {
+      return {
+        name: 'Список открытых задач по репозеторию vue:',
+      }
+    },
+    components: {
+      IssueList
+    }
   });
 </script>
 
