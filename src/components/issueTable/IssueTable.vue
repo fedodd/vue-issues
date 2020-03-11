@@ -37,52 +37,25 @@
     },
     data: function() {
       return {
-        issues: [...this.$store.getters.allIssues],
+        // issues: this.$store.getters.allIssues,
         sortReverse: false
+      }
+    },
+    computed: {
+      issues: function () {
+        return this.$store.getters.allIssues
       }
     },
     methods: {
       sort: function () {
-        if (this.sortReverse) {
-          //need to create one sort function with params and replace params in dif calls
-          this.issues.sort((b, a) => {
-            const aTitle = a.title.toLowerCase();
-            const bTitle = b.title.toLowerCase()
-            if (aTitle > bTitle) {
-              return 1;
-            } else if (aTitle < bTitle) {
-              return -1;
-            }
-            return 0;
-          })
-        } else {
-          this.issues.sort((a, b) => {
-            const aTitle = a.title.toLowerCase();
-            const bTitle = b.title.toLowerCase()
-            if (aTitle > bTitle) {
-              return 1;
-            } else if (aTitle < bTitle) {
-              return -1;
-            }
-            return 0;
-          })
-        }
-
-
+        this.$store.dispatch('sortIssues', this.sortReverse)
         this.sortReverse = !this.sortReverse;
-
-
       },
       filter: function() {
         const filteredIssues = this.issues.filter(elem => elem.comments > 0);
         this.issues = filteredIssues;
       }
     },
-    mounted() {
-      console.log('mounted');
-
-    },
-
     components: {
       Issue
     }

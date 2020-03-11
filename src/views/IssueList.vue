@@ -66,7 +66,6 @@
 
             // just for train and for push data to issuePage
             this.$store.dispatch('pseudoFetchIssues', response.data)
-
           })
           .catch(error => {
             console.log(error);

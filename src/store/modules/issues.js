@@ -5,10 +5,31 @@ export default {
     pseudoFetchIssues(ctx, issues) {
       ctx.commit('updateIssues', issues)
     },
+    sortIssues(ctx, direction) {
+      ctx.commit('sortIssues', direction)
+    }
   },
   mutations: {
     updateIssues(state, issues) {
       state.issues = issues;
+    },
+    sortIssues(state, direction) {
+      function sort(a, b) {
+        const aTitle = a.title.toLowerCase();
+        const bTitle = b.title.toLowerCase()
+        if (aTitle > bTitle) {
+          return 1;
+        } else if (aTitle < bTitle) {
+          return -1;
+        }
+        return 0;
+      }
+
+      if (direction) {
+        state.issues.sort((a, b) => sort(b, a))
+      } else {
+        state.issues.sort((a, b) => sort(a, b))
+      }
     }
   },
   state: {
