@@ -7,6 +7,9 @@ export default {
     },
     sortIssues(ctx, direction) {
       ctx.commit('sortIssues', direction)
+    },
+    filterIssues(ctx, checked) {
+      ctx.commit('filterIssues', checked)
     }
   },
   mutations: {
@@ -30,6 +33,10 @@ export default {
       } else {
         state.issues.sort((a, b) => sort(a, b))
       }
+    },
+    filterIssues(state, checked) {
+      checked ?
+        state.issues = state.issues.filter(elem => elem.comments > 0) : null;
     }
   },
   state: {
@@ -38,7 +45,7 @@ export default {
     link: 'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
     linkParams: {},
     loading: true,
-    errored: false
+    errored: false,
   },
   getters: {
     allIssues(state) {

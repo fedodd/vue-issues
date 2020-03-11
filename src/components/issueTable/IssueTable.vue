@@ -1,5 +1,13 @@
 <template>
   <div>
+    <label>Только задачи с комментариями
+      <input
+        type="checkbox"
+        id="checkbox"
+        v-model="filterChecked"
+        v-on:change="filter"
+        >
+    </label>
     <table class="table">
       <thead class="thead">
         <th class="th issue-name">Задача
@@ -37,13 +45,23 @@
     },
     data: function() {
       return {
-        // issues: this.$store.getters.allIssues,
-        sortReverse: false
+        sortReverse: false,
+        filterChecked: false
       }
     },
     computed: {
-      issues: function () {
-        return this.$store.getters.allIssues
+      issues: {
+        get: function () {
+          console.log('i am in get');
+          return this.$store.getters.allIssues
+        },
+        set: function (filtered) {
+
+          //const filtered = this.$store.getters.allIssues.filter(elem => elem.comments > 0);
+          console.log('i am in set', filtered);
+          //this.issues = filtered;
+          //return filtered;
+        }
       }
     },
     methods: {
@@ -52,8 +70,9 @@
         this.sortReverse = !this.sortReverse;
       },
       filter: function() {
-        const filteredIssues = this.issues.filter(elem => elem.comments > 0);
-        this.issues = filteredIssues;
+        console.log(this.issues, this.filterChecked);
+        this.filterChecked ?
+        this.issues = this.issues.filter(elem => elem.comments > 0) : null;
       }
     },
     components: {
