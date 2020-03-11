@@ -6,7 +6,7 @@
         {{issue.title}}
       </router-link>
     </td>
-    <td class="td issue-status">{{issue.state}}</td>
+    <!-- <td class="td issue-status">{{issue.state}}</td> -->
     <td class="td issue-comments">{{issue.comments}}</td>
     <td class="td">{{issue.created_at}}</td>
   </tr>

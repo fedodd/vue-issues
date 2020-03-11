@@ -1,21 +1,35 @@
 <template>
-  <table class="table">
-    <thead class="thead">
-      <th class="th issue-name">Задача</th>
-      <th class="th issue-status">Статус</th>
-      <th class="th issue-comments">Комментарии
-        <button
-          class="button is__filter"
-          @click="getData(link, {sort: 'comments'})" ></button>
-      </th>
-      <th class="th issue-created">Создана
-        <button
-          class="button is__filter"
-          @click="getData(link, {sort:'created_at'})" ></button>
-      </th>
-    </thead>
-    <Issue v-for="issue in issuesData" v-bind:key="issue.id" v-bind:issue="issue"/>
-  </table>
+  <div>
+    <label>Только задачи с комментариями
+      <input
+        type="checkbox"
+        id="checkbox"
+        v-model="filterChecked"
+        >
+    </label>
+    <table class="table">
+      <thead class="thead">
+        <th class="th issue-name">Задача
+          <button
+            class="button is__sort"
+            v-bind:class="{ is__reverse: sortReverse }"
+            @click="sort()" ></button>
+        </th>
+        <!-- <th class="th issue-status">Статус</th> -->
+        <th class="th issue-comments">Комментарии
+          <button
+            class="button is__sort"
+            @click="getData(link, {sort: 'comments'})" ></button>
+        </th>
+        <th class="th issue-created">Создана
+          <button
+            class="button is__sort"
+            @click="getData(link, {sort:'created_at'})" ></button>
+        </th>
+      </thead>
+      <Issue v-for="issue in issues" v-bind:key="issue.id" v-bind:issue="issue"/>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -26,10 +40,27 @@
   export default Vue.extend({
     name: 'IssueTable',
     props: {
-      'issuesData': Array,
       'getData': Function,
       'link': String
-
+    },
+    data: function() {
+      return {
+        sortReverse: false,
+        filterChecked: false,
+      }
+    },
+    computed: {
+      issues()  {
+        return (this.filterChecked) ?
+          this.$store.getters.allIssues.filter(elem => elem.comments > 0)
+          : this.$store.getters.allIssues;
+      }
+    },
+    methods: {
+      sort: function () {
+        this.$store.dispatch('sortIssues', this.sortReverse)
+        this.sortReverse = !this.sortReverse;
+      },
     },
     components: {
       Issue
