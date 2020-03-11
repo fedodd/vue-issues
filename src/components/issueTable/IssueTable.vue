@@ -5,25 +5,25 @@
         type="checkbox"
         id="checkbox"
         v-model="filterChecked"
-        v-on:change="filter"
         >
     </label>
     <table class="table">
       <thead class="thead">
         <th class="th issue-name">Задача
           <button
-            class="button is__filter"
+            class="button is__sort"
+            v-bind:class="{ is__reverse: sortReverse }"
             @click="sort()" ></button>
         </th>
         <!-- <th class="th issue-status">Статус</th> -->
         <th class="th issue-comments">Комментарии
           <button
-            class="button is__filter"
+            class="button is__sort"
             @click="getData(link, {sort: 'comments'})" ></button>
         </th>
         <th class="th issue-created">Создана
           <button
-            class="button is__filter"
+            class="button is__sort"
             @click="getData(link, {sort:'created_at'})" ></button>
         </th>
       </thead>
@@ -46,7 +46,7 @@
     data: function() {
       return {
         sortReverse: false,
-        filterChecked: false
+        filterChecked: false,
       }
     },
     computed: {
@@ -61,11 +61,6 @@
         this.$store.dispatch('sortIssues', this.sortReverse)
         this.sortReverse = !this.sortReverse;
       },
-      filter: function() {
-        //console.log(this.issues, this.filterChecked);
-
-        //this.issues = this.issues();
-      }
     },
     components: {
       Issue

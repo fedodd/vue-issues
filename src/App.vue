@@ -61,7 +61,8 @@
     color: lightgrey;
   }
 
-  .button.is__filter {
+  .button.is__sort {
+    position: relative;
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -69,11 +70,22 @@
     border: 10px solid transparent;
     border-top-color: darkmagenta;
     background-color: transparent;
-    padding: 0
+    padding: 0;
+    opacity: .5;
   }
 
-  .button.button.is__filter:hover {
+  .button.is__sort:hover {
     box-shadow: none;
+    opacity: 1;
+  }
+
+  .button.is__sort.is__active {
+    opacity: 1;
+  }
+
+  .button.is__sort.is__reverse {
+    top: -10px;
+    transform: rotate(180deg);
   }
 
     @media (max-width: 400px) {
