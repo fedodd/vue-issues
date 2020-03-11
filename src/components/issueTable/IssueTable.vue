@@ -50,18 +50,10 @@
       }
     },
     computed: {
-      issues: {
-        get: function () {
-          console.log('i am in get');
-          return this.$store.getters.allIssues
-        },
-        set: function (filtered) {
-
-          //const filtered = this.$store.getters.allIssues.filter(elem => elem.comments > 0);
-          console.log('i am in set', filtered);
-          //this.issues = filtered;
-          //return filtered;
-        }
+      issues()  {
+        return (this.filterChecked) ?
+          this.$store.getters.allIssues.filter(elem => elem.comments > 0)
+          : this.$store.getters.allIssues;
       }
     },
     methods: {
@@ -70,9 +62,9 @@
         this.sortReverse = !this.sortReverse;
       },
       filter: function() {
-        console.log(this.issues, this.filterChecked);
-        this.filterChecked ?
-        this.issues = this.issues.filter(elem => elem.comments > 0) : null;
+        //console.log(this.issues, this.filterChecked);
+
+        //this.issues = this.issues();
       }
     },
     components: {
