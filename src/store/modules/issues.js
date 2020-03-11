@@ -51,7 +51,6 @@ export default {
     allIssues(state) {
       return state.issues
     },
-    //make string id to number
     targetIssue: state => targetId => {
       return state.issues.find(el => el.id === +targetId);
     }
