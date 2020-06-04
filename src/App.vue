@@ -63,13 +63,22 @@
 
   .button.is__filter {
     display: inline-block;
+    position: relative;
+    bottom: 10px;
+    margin-bottom: -10px;
     width: 20px;
     height: 20px;
     box-sizing: border-box;
     border: 10px solid transparent;
-    border-top-color: darkmagenta;
+    border-bottom-color: darkmagenta;
     background-color: transparent;
-    padding: 0
+    padding: 0;
+  }
+
+  .is__filter.is__toggled {
+    transition: .3s;
+    bottom: 0;
+    transform: rotate(180deg);
   }
 
   .button.button.is__filter:hover {
@@ -86,6 +95,4 @@
       margin: 5px;
     }
   }
-
-
 </style>
