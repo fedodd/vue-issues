@@ -8,7 +8,7 @@
     </td>
     <td class="td issue-status">{{issue.state}}</td>
     <td class="td issue-comments">{{issue.comments}}</td>
-    <td class="td">{{issue.created_at}}</td>
+    <td class="td">{{formatData(issue.created_at)}}</td>
   </tr>
 </template>
 
@@ -17,6 +17,12 @@
 
   export default Vue.extend({
     name: 'Issue',
-     props:['issue']
+    props:['issue'],
+    methods: {
+      formatData: function (date) {
+        const fomattedDate = new Date(date);
+        return fomattedDate.toLocaleDateString()
+      }
+    }
   })
 </script>
