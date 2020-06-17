@@ -21,25 +21,25 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { mapGetters } from "vuex";
+  import Vue from 'vue';
+  import { mapGetters } from 'vuex';
 
-export default Vue.extend({
-  name: "IssuePage",
-  data: function() {
-    return {
-      issue: {}
-    };
-  },
-  mounted() {
-    const targetId = this.$route.params.id;
-    this.issue = this.$store.getters.targetIssue(targetId);
-  }
-});
+  export default Vue.extend({
+    name: 'IssuePage',
+    data: function() {
+      return {
+        issue: {},
+      };
+    },
+    mounted() {
+      const targetId = this.$route.params.id;
+      this.issue = this.$store.getters.targetIssue(targetId);
+    },
+  });
 </script>
 
 <style scoped>
-.is__accent {
-  color: darkblue;
-}
+  .is__accent {
+    color: darkblue;
+  }
 </style>

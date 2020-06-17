@@ -12,16 +12,16 @@
 </template>
 
 <script>
-import Vue from "vue";
+  import Vue from 'vue';
 
-export default Vue.extend({
-  name: "Issue",
-  props: ["issue"],
-  methods: {
-    formatData: function(date) {
-      const fomattedDate = new Date(date);
-      return fomattedDate.toLocaleDateString();
-    }
-  }
-});
+  export default Vue.extend({
+    name: 'Issue',
+    props: ['issue'],
+    methods: {
+      formatData: function(date) {
+        const fomattedDate = new Date(date);
+        return fomattedDate.toLocaleDateString();
+      },
+    },
+  });
 </script>

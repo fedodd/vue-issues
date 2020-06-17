@@ -23,9 +23,9 @@ requireComponent.keys().forEach(fileName => {
     camelCase(
       // Получаем имя файла независимо от глубины вложенности
       fileName
-        .split("/")
-        .pop()
-        .replace(/\.\w+$/, "")
+      .split("/")
+      .pop()
+      .replace(/\.\w+$/, "")
     )
   );
 

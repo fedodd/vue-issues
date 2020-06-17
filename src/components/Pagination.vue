@@ -13,18 +13,18 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+  import Vue from 'vue';
 
-export default Vue.extend({
-  props: {
-    getData: Function,
-    pageButtons: Object
-  }
-});
+  export default Vue.extend({
+    props: {
+      getData: Function,
+      pageButtons: Object,
+    },
+  });
 </script>
 
 <style>
-.pagination {
-  padding: 20px;
-}
+  .pagination {
+    padding: 20px;
+  }
 </style>
