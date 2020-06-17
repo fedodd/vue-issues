@@ -1,33 +1,33 @@
-import Vue from 'vue';
-import App from './App';
+import Vue from "vue";
+import App from "./App";
 import router from "./router";
 import store from "./store/index";
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
+import upperFirst from "lodash/upperFirst";
+import camelCase from "lodash/camelCase";
 
 const requireComponent = require.context(
   // Относительный путь до каталога компонентов
-  './components',
+  "./components",
   // Обрабатывать или нет подкаталоги
   false,
   // Регулярное выражение для определения файлов базовых компонентов
   /Base[A-Z]\w+\.(vue|js)$/
-)
+);
 
 requireComponent.keys().forEach(fileName => {
   // Получение конфигурации компонента
-  const componentConfig = requireComponent(fileName)
+  const componentConfig = requireComponent(fileName);
 
   // Получение имени компонента в PascalCase
   const componentName = upperFirst(
     camelCase(
       // Получаем имя файла независимо от глубины вложенности
       fileName
-        .split('/')
+        .split("/")
         .pop()
-        .replace(/\.\w+$/, '')
+        .replace(/\.\w+$/, "")
     )
-  )
+  );
 
   // Глобальная регистрация компонента
   Vue.component(
@@ -36,12 +36,12 @@ requireComponent.keys().forEach(fileName => {
     // если компонент экспортирован с помощью `export default`,
     // иначе будет использован корневой уровень модуля.
     componentConfig.default || componentConfig
-  )
-})
+  );
+});
 
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
   store,
-  render: h => h(App),
+  render: h => h(App)
 });

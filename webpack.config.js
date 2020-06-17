@@ -1,49 +1,45 @@
-const webpack = require('webpack');
-const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
+const path = require("path");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[hash].js"
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
-          postcss: [require('postcss-nested')()
-          ]
+          postcss: [require("postcss-nested")()]
         }
       },
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: "babel-loader",
         exclude: /node_modules/
       },
       {
         test: /\.(pcss|css)$/,
         use: [
-          'vue-style-loader',
+          "vue-style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1
             }
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       }
     ]
   },
   resolve: {
-    extensions: [
-      '.js',
-      '.vue'
-    ]
+    extensions: [".js", ".vue"]
   },
   devServer: {
     compress: true,
@@ -59,24 +55,26 @@ const config = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-        template: require('html-webpack-template'),
-        inject: false,
-        title: 'Opened Vue issues',
-        appMountId: 'app',
-        meta: [{
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-        }]
-      })
+      template: require("html-webpack-template"),
+      inject: false,
+      title: "Opened Vue issues",
+      appMountId: "app",
+      meta: [
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1, shrink-to-fit=no"
+        }
+      ]
+    })
   ],
   optimization: {
-    runtimeChunk: 'single',
+    runtimeChunk: "single",
     splitChunks: {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
+          name: "vendors",
+          chunks: "all"
         }
       }
     }
