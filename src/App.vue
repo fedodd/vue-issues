@@ -13,11 +13,12 @@
 <style>
   body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
   }
 
   h1 {
     width: max-content;
-    max-width: 80vw;
+    max-width: 70vw;
   }
 
   .holder {
@@ -61,6 +62,7 @@
     position: relative;
     bottom: 10px;
     margin-bottom: -10px;
+    opacity: 0.3;
     width: 20px;
     height: 20px;
     box-sizing: border-box;
@@ -68,6 +70,10 @@
     border-bottom-color: darkmagenta;
     background-color: transparent;
     padding: 0;
+  }
+
+  .button.is__filter.is__active {
+    opacity: 1;
   }
 
   .is__filter.is__toggled {

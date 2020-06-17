@@ -2,13 +2,16 @@
   <table class="table">
     <thead class="thead">
       <th class="th issue-name">Задача</th>
-      <th class="th issue-status">Статус</th>
+      <th class="th issue-status">Ста&shy;тус</th>
       <th class="th issue-comments">
-        Комментарии
+        Ком&shy;мент.
         <div class="issue-buttonWrapper">
           <button
             class="button is__filter"
-            v-bind:class="{ is__toggled: sortCommentsDir === 'asc' }"
+            v-bind:class="{
+              is__toggled: sortComments.dir === 'asc',
+              is__active: sortComments.isActive,
+            }"
             @click="sortCommentsHandler()"
           ></button>
         </div>
@@ -18,7 +21,10 @@
         <div class="issue-buttonWrapper">
           <button
             class="button is__filter"
-            v-bind:class="{ is__toggled: sortCreatedDir === 'asc' }"
+            v-bind:class="{
+              is__toggled: sortCreated.dir === 'asc',
+              is__active: sortCreated.isActive,
+            }"
             @click="sortCreatedHandler()"
           ></button>
         </div>
@@ -40,8 +46,14 @@
     name: 'IssueTable',
     data: function() {
       return {
-        sortCommentsDir: 'desc',
-        sortCreatedDir: 'desc',
+        sortComments: {
+          dir: 'desc',
+          isActive: false,
+        },
+        sortCreated: {
+          dir: 'asc',
+          isActive: true,
+        },
       };
     },
     props: {
@@ -53,16 +65,21 @@
       sortCommentsHandler: function() {
         this.getData(this.link, {
           sort: 'comments',
-          direction: this.sortCommentsDir,
+          direction: this.sortComments.dir,
         });
-        this.sortCommentsDir = this.sortCommentsDir === 'desc' ? 'asc' : 'desc';
+        this.sortComments.isActive = true;
+        this.sortCreated.isActive = false;
+        this.sortComments.dir =
+          this.sortComments.dir === 'desc' ? 'asc' : 'desc';
       },
       sortCreatedHandler: function() {
         this.getData(this.link, {
           sort: 'created_at',
-          direction: this.sortCreatedDir,
+          direction: this.sortCreated.dir,
         });
-        this.sortCreatedDir = this.sortCreatedDir === 'desc' ? 'asc' : 'desc';
+        this.sortComments.isActive = false;
+        this.sortCreated.isActive = true;
+        this.sortCreated.dir = this.sortCreated.dir === 'desc' ? 'asc' : 'desc';
       },
     },
     components: {
@@ -73,7 +90,6 @@
 
 <style>
   .table {
-    margin: 5px;
     border-collapse: collapse;
     max-width: 100%;
   }
@@ -92,7 +108,7 @@
   }
 
   .issue-name {
-    max-width: 400px;
+    max-width: 500px;
   }
 
   .issue-comments {
@@ -116,12 +132,11 @@
     .th,
     .td {
       font-size: 0.8em;
-      padding: 2px 5px 2px 2px;
+      padding: 4px 5px 4px 2px;
     }
 
     .th {
-      word-break: break-all;
-      vertical-align: baseline;
+      vertical-align: bottom;
     }
   }
 </style>

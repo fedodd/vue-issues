@@ -1,0 +1,6 @@
+{
+  "prettier.vueIndentScriptAndStyle": true,
+  "prettier.singleQuote": true,
+  "prettier.jsxBracketSameLine": true,
+  "prettier.packageManager": "yarn"
+}
