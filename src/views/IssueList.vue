@@ -6,12 +6,22 @@
     </section>
     <section v-else>
       <div v-if="loading">Loading...</div>
-      <IssueTable
-        v-else
-        v-bind:issues-data="issues"
-        v-bind:getData="getData"
-        v-bind:link="link"
-      />
+      <div v-else>
+        <label>
+          Только задачи с комментариями
+          <input
+            type="checkbox"
+            id="checkbox"
+            v-model="filterChecked"
+            v-on:change="filterData"
+          />
+        </label>
+        <IssueTable
+          v-bind:issues-data="filterChecked ? filteredIssues : issues"
+          v-bind:getData="getData"
+          v-bind:link="link"
+        />
+      </div>
       <Pagination v-bind:pageButtons="pageButtons" v-bind:getData="getData" />
     </section>
   </div>
@@ -27,23 +37,32 @@
 
   export default Vue.extend({
     name: 'issueList',
-    computed: mapGetters(['allIssues']),
+    computed: {
+      issues() {
+        return this.$store.state.issues.issues;
+      },
+      filteredIssues() {
+        return this.$store.state.issues.filteredIssues;
+      },
+    },
 
     data: function() {
       return {
         name: 'Список открытых задач по репозеторию vue:',
-        issues: [],
+        // issues: [],
         pageButtons: {},
         link:
           'https://api.github.com/repositories/11730342/issues?state=open&per_page=20',
         linkParams: {},
         loading: true,
         errored: false,
+        filterChecked: false,
       };
     },
-
     methods: {
-      //mapActions('pseudoFetchIssues'),
+      filterData: function(e) {
+        this.$store.dispatch('filterIssues', this.filterChecked);
+      },
       getData: function(link, params) {
         this.linkParams = { ...params };
         //make request function
@@ -67,6 +86,8 @@
 
             // just for train and for push data to issuePage
             this.$store.dispatch('pseudoFetchIssues', response.data);
+            // make filter here to do it only one time
+            this.$store.dispatch('filterIssues');
           })
           .catch((error) => {
             console.log(error);
@@ -77,6 +98,7 @@
     },
     mounted() {
       this.getData(this.link);
+      console.log(this.allIssues);
     },
     components: {
       IssueTable,
