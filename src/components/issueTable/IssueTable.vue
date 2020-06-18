@@ -1,43 +1,41 @@
 <template>
-  <div>
-    <table class="table">
-      <thead class="thead">
-        <th class="th issue-name">Задача</th>
-        <th class="th issue-status">Ста&shy;тус</th>
-        <th class="th issue-comments">
-          Ком&shy;мент.
-          <div class="issue-buttonWrapper">
-            <button
-              class="button is__filter"
-              v-bind:class="{
-                is__toggled: sortComments.dir === 'asc',
-                is__active: sortComments.isActive,
-              }"
-              @click="sortCommentsHandler()"
-            ></button>
-          </div>
-        </th>
-        <th class="th issue-created">
-          Создана
-          <div class="issue-buttonWrapper">
-            <button
-              class="button is__filter"
-              v-bind:class="{
-                is__toggled: sortCreated.dir === 'asc',
-                is__active: sortCreated.isActive,
-              }"
-              @click="sortCreatedHandler()"
-            ></button>
-          </div>
-        </th>
-      </thead>
-      <Issue
-        v-for="issue in issuesData"
-        v-bind:key="issue.id"
-        v-bind:issue="issue"
-      />
-    </table>
-  </div>
+  <table class="table">
+    <thead class="thead">
+      <th class="th issue-name">Задача</th>
+      <th class="th issue-status">Ста&shy;тус</th>
+      <th class="th issue-comments">
+        Ком&shy;мент.
+        <div class="issue-buttonWrapper">
+          <button
+            class="button is__filter"
+            v-bind:class="{
+              is__toggled: sortComments.dir === 'asc',
+              is__active: sortComments.isActive,
+            }"
+            @click="sortCommentsHandler()"
+          ></button>
+        </div>
+      </th>
+      <th class="th issue-created">
+        Создана
+        <div class="issue-buttonWrapper">
+          <button
+            class="button is__filter"
+            v-bind:class="{
+              is__toggled: sortCreated.dir === 'asc',
+              is__active: sortCreated.isActive,
+            }"
+            @click="sortCreatedHandler()"
+          ></button>
+        </div>
+      </th>
+    </thead>
+    <Issue
+      v-for="issue in issuesData"
+      v-bind:key="issue.id"
+      v-bind:issue="issue"
+    />
+  </table>
 </template>
 
 <script>
@@ -82,9 +80,8 @@
         this.sortComments.isActive = false;
         this.sortCreated.isActive = true;
         this.sortCreated.dir = this.sortCreated.dir === 'desc' ? 'asc' : 'desc';
-      },
+      }
     },
-
     components: {
       Issue,
     },

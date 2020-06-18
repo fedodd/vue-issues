@@ -8,6 +8,12 @@ export default {
     filterIssues(ctx, checked) {
       ctx.commit('filterIssues', checked);
     },
+    sortIssues(ctx, direction) {
+      ctx.commit('sortIssues', direction)
+    },
+    filterIssues(ctx, checked) {
+      ctx.commit('filterIssues', checked)
+    }
   },
   mutations: {
     updateIssues(state, issues) {

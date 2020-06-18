@@ -86,6 +86,7 @@
 
             // just for train and for push data to issuePage
             this.$store.dispatch('pseudoFetchIssues', response.data);
+            
             // make filter here to do it only one time
             this.$store.dispatch('filterIssues');
           })

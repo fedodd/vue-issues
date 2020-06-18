@@ -57,7 +57,8 @@
     color: lightgrey;
   }
 
-  .button.is__filter {
+  .button.is__sort {
+    position: relative;
     display: inline-block;
     position: relative;
     bottom: 10px;
@@ -82,8 +83,18 @@
     transform: rotate(180deg);
   }
 
-  .button.button.is__filter:hover {
+  .button.is__sort:hover {
     box-shadow: none;
+    opacity: 1;
+  }
+
+  .button.is__sort.is__active {
+    opacity: 1;
+  }
+
+  .button.is__sort.is__reverse {
+    top: -10px;
+    transform: rotate(180deg);
   }
 
   @media (max-width: 400px) {
