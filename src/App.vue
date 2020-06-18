@@ -1,28 +1,24 @@
-
 <template>
   <div class="holder">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-  import Vue from "vue";
+  import Vue from 'vue';
 
-  export default Vue.extend({
-  });
+  export default Vue.extend({});
 </script>
 
-
-
 <style>
-
   body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
   }
 
   h1 {
     width: max-content;
-    max-width: 80vw;
+    max-width: 70vw;
   }
 
   .holder {
@@ -38,17 +34,17 @@
     border-radius: 2px;
     padding: 5px;
     margin-right: 20px;
-    transition: .3s;
+    transition: 0.3s;
     outline: none;
   }
 
   .button:hover {
     cursor: pointer;
-    box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.75);
   }
 
   .button:hover:disabled {
-    cursor:not-allowed;
+    cursor: not-allowed;
     box-shadow: none;
   }
 
@@ -64,14 +60,27 @@
   .button.is__sort {
     position: relative;
     display: inline-block;
+    position: relative;
+    bottom: 10px;
+    margin-bottom: -10px;
+    opacity: 0.3;
     width: 20px;
     height: 20px;
     box-sizing: border-box;
     border: 10px solid transparent;
-    border-top-color: darkmagenta;
+    border-bottom-color: darkmagenta;
     background-color: transparent;
     padding: 0;
-    opacity: .5;
+  }
+
+  .button.is__filter.is__active {
+    opacity: 1;
+  }
+
+  .is__filter.is__toggled {
+    transition: 0.3s;
+    bottom: 0;
+    transform: rotate(180deg);
   }
 
   .button.is__sort:hover {
@@ -88,7 +97,7 @@
     transform: rotate(180deg);
   }
 
-    @media (max-width: 400px) {
+  @media (max-width: 400px) {
     h1 {
       font-size: 1.2em;
       width: 100%;
@@ -98,6 +107,4 @@
       margin: 5px;
     }
   }
-
-
 </style>

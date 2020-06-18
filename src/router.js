@@ -6,10 +6,8 @@ import IssuePage from "./views/IssuePage";
 Vue.use(Router);
 
 export default new Router({
-  // mode: "history",
-  // base: '/',
-  routes: [
-    {
+  mode: "history",
+  routes: [{
       path: "/",
       component: IssueList
     },
