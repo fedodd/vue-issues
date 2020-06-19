@@ -1,20 +1,23 @@
-import Vue from "vue";
-import Router from "vue-router";
-import IssueList from "./views/IssueList";
-import IssuePage from "./views/IssuePage";
+import Vue from 'vue';
+import Router from 'vue-router';
+import IssueList from './views/IssueList';
+import IssuePage from './views/IssuePage';
 
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
   routes: [{
-      path: "/",
-      component: IssueList
+      path: '/',
+      redirect: '/issues/',
     },
     {
-      path: "/issues/:id",
-      component: IssuePage,
-      props: true
+      path: '/issues/',
+      component: IssueList,
+      children: [{
+        path: '/issues/:id',
+        component: IssuePage,
+        props: true
+      }]
     }
   ]
 });
