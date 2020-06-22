@@ -13,11 +13,11 @@ export default new Router({
     {
       path: '/issues/',
       component: IssueList,
-      children: [{
-        path: '/issues/:id',
-        component: IssuePage,
-        props: true
-      }]
-    }
-  ]
+    },
+    {
+      path: '/issues/:id',
+      component: IssuePage,
+      props: true,
+    },
+  ],
 });
